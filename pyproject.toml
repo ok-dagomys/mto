@@ -10,6 +10,8 @@ pandas = "^1.4.3"
 openpyxl = "^3.0.10"
 PyQt5 = "^5.15.7"
 docxtpl = "^0.16.4"
+xlwings = "^0.27.14"
+matplotlib = "^3.5.3"
 
 [tool.poetry.dev-dependencies]
 
