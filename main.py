@@ -1,11 +1,13 @@
 import sys
 
-import pandas as pd
 from PyQt5.QtGui import QDoubleValidator
-from PyQt5.QtWidgets import QItemDelegate, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, QWidget, QVBoxLayout, \
+from PyQt5.QtWidgets import QItemDelegate, \
+    QLineEdit, QTableWidget, QHeaderView, \
+    QTableWidgetItem, QWidget, QVBoxLayout, \
     QPushButton, QApplication
 
-import cfg
+import task
+import warehouse
 
 
 class FloatDelegate(QItemDelegate):
@@ -49,18 +51,11 @@ class TableWidget(QTableWidget):
 
 
 class DataEditor(QWidget):
-    data = pd.read_excel(cfg.src, header=None, index_col=None)
-    rem_words = ['Наименвание', 'Кол-во']
-    for word in rem_words:
-        data = data.mask(data == word)
-    data = data[[1, 3]].dropna(axis=0, how='all').reset_index(drop=True)
-    data.columns = ['name', 'amount']
-
-    df = pd.DataFrame(data)
+    df = warehouse.df
 
     def __init__(self):
         super().__init__()
-        self.resize(1920, 1080)
+        self.resize(1400, 800)
 
         main_layout = QVBoxLayout()
 
@@ -88,8 +83,8 @@ class DataEditor(QWidget):
         print(self.table.df)
 
     def save_data(self):
-        self.table.df.to_excel("warehouse.xlsx")
-        print('All data saved.')
+        task.create_task(self.df)
+        print('Task created')
 
     def convert_data(self):
         print(self.table.df)
