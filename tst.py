@@ -43,10 +43,10 @@ class TableWidget(QTableWidget):
         for i in range(self.rowCount()):
             for j in range(self.columnCount()):
                 self.setItem(i, j, QTableWidgetItem(str(self.df.iloc[i, j])))
-                chkBoxItem = QTableWidgetItem(str(i))
-                chkBoxItem.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                chkBoxItem.setCheckState(QtCore.Qt.Unchecked)
-                self.setItem(i, 0, chkBoxItem)
+                checkbox_item = QTableWidgetItem(str(i))
+                checkbox_item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+                checkbox_item.setCheckState(QtCore.Qt.Unchecked)
+                self.setItem(i, 0, checkbox_item)
 
         self.cellChanged[int, int].connect(self.update_df)
 
